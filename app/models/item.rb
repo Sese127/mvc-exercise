@@ -13,6 +13,8 @@
 #
 
 class Item < ApplicationRecord
+  belongs_to :category
+
   def price
    if has_discount == true 
    discount = self.original_price * self.discount_percentage/100

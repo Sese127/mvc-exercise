@@ -17,6 +17,7 @@ FactoryBot.define do
     original_price      { Faker::Number.decimal(2) }
     has_discount        { Faker::Boolean.boolean }
     discount_percentage {Faker::Number.between(1, 100)}
+    name                {Faker::LordOfTheRings.character}
    
 
     trait :with_discount do

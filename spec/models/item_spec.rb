@@ -25,6 +25,7 @@ RSpec.describe Item, type: :model do
       it { is_expected.to have_db_column(:has_discount).of_type(:boolean).with_options(default: false) }
       it { is_expected.to have_db_column(:discount_percentage).of_type(:integer).with_options(default: 0) }
       it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
+      it { is_expected.to have_db_column(:name).of_type(:string) }
     end
   end
 
@@ -44,13 +45,14 @@ RSpec.describe Item, type: :model do
     end
   end
 
-  describe 'Average_price' do 
+  describe 'Average price' do 
     context 'gives an average price of many items' do 
       FactoryBot.create(:item_without_discount, original_price: 40.00)
-      FactoryBot.create(:item_without_discount, original_price: 10.00)
+      FactoryBot.create(:item_with_discount, original_price: 40.00, discount_percentage:10)
+      FactoryBot.create(:item_without_discount, original_price: 14.00)
 
-     it {expect(Item.average_price).to eq(25.00)}
+     it {expect(Item.average_price).to eq(27.00)}
      end 
-    end
+  end
     
 end
